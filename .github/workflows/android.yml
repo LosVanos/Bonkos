@@ -1,0 +1,68 @@
+name: Android (APK e AAB)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HAS_KEYSTORE: ${{ secrets.KEYSTORE_BASE64 != '' }}
+      BONKOS_VERSION_CODE: ${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: android-actions/setup-android@v3
+      - run: npm ci
+      - run: node build-www.js
+      - run: npx cap sync android
+
+      - name: APK de teste (instala no telemóvel)
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bonkos-apk-teste
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Guardar a APK no ramo "apk" (para descarregar facilmente)
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk $RUNNER_TEMP/Bonkos.apk
+          git config user.name "bonkos-bot"
+          git config user.email "bonkos-bot@users.noreply.github.com"
+          git checkout --orphan apk
+          git rm -rf --cached . > /dev/null
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp $RUNNER_TEMP/Bonkos.apk Bonkos.apk
+          echo "Compilação ${{ github.run_number }} de ${{ github.sha }}" > LEIA-ME.txt
+          git add Bonkos.apk LEIA-ME.txt
+          git commit -m "APK ${{ github.run_number }}"
+          git push -f origin apk
+
+      - name: Preparar chave de assinatura
+        if: env.HAS_KEYSTORE == 'true'
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > $RUNNER_TEMP/bonkos.jks
+      - name: AAB assinado (para a Play Store)
+        if: env.HAS_KEYSTORE == 'true'
+        working-directory: android
+        env:
+          BONKOS_KEYSTORE: ${{ runner.temp }}/bonkos.jks
+          BONKOS_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          BONKOS_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          BONKOS_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew bundleRelease --no-daemon
+      - uses: actions/upload-artifact@v4
+        if: env.HAS_KEYSTORE == 'true'
+        with:
+          name: bonkos-aab-playstore
+          path: android/app/build/outputs/bundle/release/app-release.aab

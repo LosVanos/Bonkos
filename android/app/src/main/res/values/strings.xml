@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bonkos</string>
+    <string name="title_activity_main">Bonkos</string>
+    <string name="package_name">pt.bonkos.game</string>
+    <string name="custom_url_scheme">pt.bonkos.game</string>
+    <!-- Troca pelo ID da tua app no AdMob antes de publicar (este é o de teste da Google) -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+</resources>
