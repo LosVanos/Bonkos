@@ -1423,8 +1423,8 @@ const TYPES={
     passivo:'Divide-se: aos 66% e aos 33% de vida parte-se em duas. As bolachinhas atacam sozinhas e, quando ficam a meio, dividem-se outra vez em duas.',
     ult:'Fornada',ultDesc:'Parte-se em mais bolachinhas e todas investem contra o inimigo, a dobrar o dano.'},
   geleia: {nome:'Geleia', c:'#5b7cff',d:'#2a3a9a',l:'#c4d2ff',ui:'#7f9bff',hp:112,r:.64,spd:3.2,st:[3,3,5],
-    basico:'Solta mini-geleias que perseguem o inimigo e rebentam contra ele. Também bloqueiam projéteis.',
-    passivo:'Divide-se: quando leva um golpe forte, salta-lhe uma mini-geleia do corpo.',
+    basico:'Solta mini-geleias que saltam contra o inimigo e rebentam ao tocar-lhe. Se falharem, desfazem-se ao fim de 3 s. Uma investida rebenta-as.',
+    passivo:'Divide-se: quando leva um golpe muito forte, salta-lhe uma mini-geleia do corpo.',
     ult:'Grande divisão',ultDesc:'Divide-se numa onda de mini-geleias rápidas que cercam o inimigo.'},
   anjo:   {nome:'Anjo',   c:'#fff4d6',d:'#c9a24a',l:'#ffffff',ui:'#ffd77a',hp:92,r:.6,spd:3.4,st:[2,3,5],
     basico:'Orbes de luz teleguiados. Fracos, mas certeiros.',
@@ -1643,7 +1643,7 @@ function hurt(t,amt,src,o={}){
     if(amt<=0)return;}
   t.hp-=amt;t.lagHold=.45;t.pend+=amt;
   if(t.key==='bolacha')crumbleCheck(t);
-  if(t.key==='geleia'&&!o.dot&&amt>=10&&t.hp>0&&gameT-(t.splitT??-9)>2.5){t.splitT=gameT;spawnMini(t);}
+  if(t.key==='geleia'&&!o.dot&&amt>=14&&t.hp>0&&gameT-(t.splitT??-9)>4){t.splitT=gameT;spawnMini(t);}
   if(!o.dot){crowdCheer(Math.min(.35,amt*.022)+(crit?.15:0));
     if(amt>=6){const ip=src&&src!==t?t.p.clone().add(src.p.clone().sub(t.p).normalize().multiplyScalar(t.r*.75)):t.p;addImpact(ip,src?src.def.ui:'#fff',amt,crit);}
     if(amt>=8)addDecal(t.p,src?src.key:'',amt);
@@ -1675,7 +1675,7 @@ function NOMODS(){return{hp:1,dmg:1,cd:1,en:1,spd:1,taken:1,crit:0,ls:0,contact:
 const TIERS=['Baby','MK2','MK3'];
 const tierName=(k,t)=>t===0?'Baby '+TYPES[k].nome:TYPES[k].nome+' '+TIERS[t];
 /* afinação de equilíbrio por tipo e evolução: [vida, dano] */
-const BAL={bolacha:[[0.96,0.96],[0.835,0.835],[0.83,0.83]],geleia:[[0.906,0.906],[0.965,0.965],[1.032,1.032]],rosa:[[0.948,0.948],[0.91,0.91],[0.918,0.918]],pipoca:[[1.031,1.031],[0.979,0.979],[0.937,0.937]],ima:[[1.076,1.076],[1.128,1.128],[1.044,1.044]],anjo:[[0.888,0.888],[0.899,0.899],[0.713,0.713]],cacto:[[0.955,0.955],[0.964,0.964],[0.982,0.982]],fogo:[[0.981,0.981],[0.96,0.96],[1.001,1.001]],gelo:[[1.027,1.027],[1.026,1.026],[1.113,1.113]],raio:[[1.025,1.025],[1.12,1.12],[1.154,1.154]],veneno:[[1.076,1.076],[1.047,1.047],[1.175,1.175]],vampiro:[[1.088,1.088],[1.031,1.031],[1.166,1.166]],tremor:[[0.955,0.955],[0.913,0.913],[0.939,0.939]],bomba:[[0.901,0.901],[0.988,0.988],[0.806,0.806]],prisma:[[1.023,1.023],[1.06,1.06],[1.156,1.156]]};
+const BAL={bolacha:[[0.96,0.96],[0.835,0.835],[0.83,0.83]],geleia:[[1.22,1.22],[1.26,1.26],[1.28,1.28]],rosa:[[0.948,0.948],[0.91,0.91],[0.918,0.918]],pipoca:[[1.031,1.031],[0.979,0.979],[0.937,0.937]],ima:[[1.076,1.076],[1.128,1.128],[1.044,1.044]],anjo:[[0.888,0.888],[0.899,0.899],[0.713,0.713]],cacto:[[0.955,0.955],[0.964,0.964],[0.982,0.982]],fogo:[[0.981,0.981],[0.96,0.96],[1.001,1.001]],gelo:[[1.027,1.027],[1.026,1.026],[1.113,1.113]],raio:[[1.025,1.025],[1.12,1.12],[1.154,1.154]],veneno:[[1.076,1.076],[1.047,1.047],[1.175,1.175]],vampiro:[[1.088,1.088],[1.031,1.031],[1.166,1.166]],tremor:[[0.955,0.955],[0.913,0.913],[0.939,0.939]],bomba:[[0.901,0.901],[0.988,0.988],[0.806,0.806]],prisma:[[1.023,1.023],[1.06,1.06],[1.156,1.156]]};
 function buildFighter(key,side,mirror,o={}){
   const d=TYPES[key];const tb=(BAL[key]||[])[o.tier??1]||[1,1];const mods=Object.assign({},o.mods||NOMODS());mods.hp*=tb[0];mods.dmg*=tb[1];const tier=o.tier??1;const cos=Object.assign({},DEFCOS,o.cos||{});if(key==='anjo')mods.revive=Math.max(mods.revive||0,[.35,.45,.55][tier]);const hp=Math.round(d.hp*1.9*mods.hp*[.8,1,1.35][tier]);
   const rock=key==='tremor'?Array.from({length:11},()=>rnd(.86,1.04)):null;
@@ -1740,10 +1740,11 @@ function spawnMini(b,burst){
   const T=b.tier,max=[3,4,5][T]+(burst?6:0),own=hazards.filter(h=>h.kind==='mini'&&h.owner===b&&!h.dead);
   if(own.length>=max){if(!burst)return false;killHazard(own[0],true);}
   const a=rnd(TAU),dir=new V(Math.cos(a),Math.sin(a));const p=b.p.clone().addScaledVector(dir,b.r+.25);clampIn(p,.35);
-  hazards.push({kind:'mini',owner:b,p,v:dir.multiplyScalar(5),r:.3,age:0,life:7,spd:[3.9,4.4,4.9][T]*(burst?1.3:1),dmg:[8.5,9.5,10.5][T],ph:rnd(TAU)});
+  hazards.push({kind:'mini',owner:b,p,v:dir.multiplyScalar(4),r:.3,age:0,life:[2.8,3,3.2][T],spd:[3.8,4.2,4.6][T]*(burst?1.2:1),turn:[1.8,2,2.2][T],dmg:[8,9,10][T],ph:rnd(TAU)});
   emit(p,b.def.c,8,3,.35,.09);sfx('hit',2);return true;}
 function popMini(h,hitT){h.dead=true;const c=h.owner.def.c;emit(h.p,c,14,4,.4,.11);emit(h.p,'#ffffff',5,3,.3,.08);ring(h.p,c,.9,.25,.08);
-  if(h.owner.tier===2)hazards.push({kind:'gosma',owner:h.owner,p:h.p.clone(),r:.6,age:0,life:3,last:-9});}
+  if(h.owner.tier===2&&hitT)hazards.push({kind:'gosma',owner:h.owner,p:h.p.clone(),r:.6,age:0,life:2.5,last:-9});}
+function fizzleMini(h){h.dead=true;const c=h.owner.def.c;emit(h.p,c,8,2,.35,.08);emit(h.p,'#ffffff',4,1.5,.25,.06);}
 function killHazard(h,silent){
   if(h.kind==='mini'&&!silent&&!h.dead){popMini(h);return;}
   h.dead=true;
@@ -1978,9 +1979,9 @@ function castUlt(b){
         if(T===2){heal(b,b.maxHp*.08);dmgNumber(b.p,Math.round(b.maxHp*.08),'#5ccf7a',false,true);}});
       break;}
     case 'geleia':{
-      const n=[4,6,8][T];b.charging=.5;
+      const n=[3,4,6][T];b.charging=.5;
       later(.5,()=>{if(!b.alive)return;b.charging=0;flash('#c4d2ff',.3);shake(.4);ring(b.p,'#5b7cff',3,.4,.2);emit(b.p,'#c4d2ff',30,7,.6,.14);
-        for(let i=0;i<n;i++)later(i*.07,()=>{if(b.alive)spawnMini(b,true);});heal(b,b.maxHp*.08);dmgNumber(b.p,Math.round(b.maxHp*.08),'#5ccf7a',false,true);});
+        for(let i=0;i<n;i++)later(i*.07,()=>{if(b.alive)spawnMini(b,true);});heal(b,b.maxHp*.05);dmgNumber(b.p,Math.round(b.maxHp*.05),'#5ccf7a',false,true);});
       break;}
     case 'rosa':{
       const dur=[1.5,2,2.5][T];
@@ -2045,7 +2046,8 @@ function doDash(b,aim){const dir=aim.clone().sub(b.p);if(dir.length()<.05)return
 function dashTick(b,dt){
   b.dashCd=(b.dashCd||0)-dt;if(b.dashT>0){b.dashT-=dt;if(Math.random()<dt*40)emit(b.p,b.def.ui,1,.4,.3,.12,null,3,'dot',b.r*.4);}
   if(b.human){b.fury=Math.max(.55,(b.fury??.55)-dt*.22);if(b.fury>.6&&Math.random()<dt*b.fury*30)emit(b.p,Math.random()<.5?'#ff7a1a':'#ffd23d',1,1.2,.4,.1,new V(0,-2),1,'dot',b.r*.7);}else b.fury=.55;
-  if(b.human||b.stuck||b.frozen>0||b.charging>0)return;
+  // quem não está a tocar no ecrã também investe sozinho (como a IA); quem toca controla quando e para onde
+  if((b.human&&gameT-(b.tapT??-99)<5)||b.stuck||b.frozen>0||b.charging>0)return;
   b.aiDash=(b.aiDash??rnd(1.5,3))-dt;
   if(b.aiDash<=0&&b.dashCd<=0){b.aiDash=rnd(3.5,6);const t=foe(b);if(t&&t.alive){const d=t.p.distanceTo(b.p);if(d>2.2&&d<11)doDash(b,t.p.clone().addScaledVector(t.v,.22));}}
 }
@@ -2163,11 +2165,14 @@ function step(dt){
       h.p.copy(h.holding.p);
     }else if(h.kind==='mini'){
       const t=foe(h.owner);h.ph+=dt*9;
-      if(t&&t.alive&&state==='fight'){const dir=t.p.clone().sub(h.p);const d=dir.length()||1;dir.divideScalar(d);h.v.lerp(dir.multiplyScalar(h.spd),Math.min(1,dt*3));
-        if(d<t.r+h.r){hurt(t,h.dmg,h.owner,{canCrit:true});t.v.addScaledVector(dir,2);popMini(h);hazards.splice(i,1);continue;}}
+      if(t&&t.alive&&state==='fight'){const dir=t.p.clone().sub(h.p);const d=dir.length()||1;dir.divideScalar(d);h.v.lerp(dir.multiplyScalar(h.spd),Math.min(1,dt*(h.turn||3)));
+        if(d<t.r+h.r){
+          // um bonko a investir (dash) rebenta as mini-geleias sem levar dano
+          if(t.dashT>0){fizzleMini(h);ring(h.p,'#ffffff',.8,.2,.08);if(t.human)announceSmall('Mini-geleia rebentada!','#c4d2ff');hazards.splice(i,1);continue;}
+          hurt(t,h.dmg,h.owner,{canCrit:true});t.v.addScaledVector(dir,2);popMini(h,true);hazards.splice(i,1);continue;}}
       else h.v.multiplyScalar(Math.exp(-dt*3));
       h.p.addScaledVector(h.v,dt);for(const a of AX){if(Math.abs(h.p[a])>L-h.r){h.p[a]=Math.sign(h.p[a])*(L-h.r);h.v[a]*=-1;}}
-      if(h.age>=h.life||!h.owner.alive){popMini(h);hazards.splice(i,1);continue;}
+      if(h.age>=h.life||!h.owner.alive){fizzleMini(h);hazards.splice(i,1);continue;}
     }else if(h.kind==='gosma'){
       const t=foe(h.owner);if(t&&t.alive&&state==='fight'&&t.p.distanceTo(h.p)<t.r+h.r){t.slow=Math.max(t.slow,.5);if(gameT-h.last>.6){h.last=gameT;hurt(t,1.5,h.owner,{dot:true});}}
       if(h.age>=h.life){killHazard(h,true);hazards.splice(i,1);}
@@ -4013,7 +4018,7 @@ $('#ultBtn').addEventListener('click',e=>{e.stopPropagation();playerUlt();});
 cv.style.touchAction='none';
 cv.addEventListener('pointerdown',e=>{const f=fighters[0];if(state!=='fight'||paused||!f||!f.human||!f.alive)return;
   const rc=cv.getBoundingClientRect(),w=new V((e.clientX-rc.left-CX)/S,(e.clientY-rc.top-CY)/S);
-  const was=f.fury??.55;f.fury=Math.min(1,was+.06);emit(w,Math.random()<.5?'#ffd23d':'#ff7a1a',4,3,.25,.07,null,3,'spark');
+  f.tapT=gameT;const was=f.fury??.55;f.fury=Math.min(1,was+.06);emit(w,Math.random()<.5?'#ffd23d':'#ff7a1a',4,3,.25,.07,null,3,'spark');
   if(was<1&&f.fury>=1){announceSmall('FÚRIA MÁXIMA! +12% dano','#ffb020');ring(f.p,'#ff7a1a',2.2,.35,.14);crowdCheer(.3);}
   if(f.stuck||f.frozen>0||f.charging>0)return;
   if((f.dashCd||0)>0){ring(w,'rgba(255,255,255,.5)',.5,.2,.04);return;}
@@ -4085,7 +4090,7 @@ const EVOTXT={
   bomba:['Lança uma mina para perto do inimigo.','Lança minas para o caminho do inimigo.','Lança duas minas que rebentam em cacho.'],
   prisma:['Laser com 1 ricochete.','Laser com 3 ricochetes.','Três lasers em leque.'],
   bolacha:['Uma pepita de cada vez. Até 3 bolachinhas ao mesmo tempo.','Duas pepitas de cada vez. Até 5 bolachinhas, que batem mais.','Duas pepitas. Até 7 bolachinhas, que batem e disparam mais depressa.'],
-  geleia:['Até 3 mini-geleias ao mesmo tempo.','Até 4 mini-geleias, mais rápidas.','Até 5 mini-geleias, que ao rebentar deixam gosma pegajosa no chão.'],
+  geleia:['Até 3 mini-geleias ao mesmo tempo.','Até 4 mini-geleias, mais rápidas.','Até 5 mini-geleias; as que acertam deixam gosma pegajosa no chão.'],
   rosa:['Duas pétalas de cada vez.','Três pétalas em leque.','Quatro pétalas e planta roseiras de espinhos no caminho do inimigo.'],
   pipoca:['Duas pipocas por batida.','Três pipocas por batida, mais rápidas.','Quatro pipocas por batida e algumas rebentam em duas.'],
   ima:['Pulso que puxa pouco.','Pulso mais forte e mais frequente.','Também desvia projéteis inimigos e devolve-os.'],
@@ -5419,7 +5424,7 @@ function iris(mid,ev){
 }
 /* janelas: animação de saída sem mexer na lógica (o jogo continua a ver a janela como fechada) */
 function overlayExitAnims(){
-  const D=Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden');if(!D||!D.set)return;
+  const D=typeof HTMLElement!=='undefined'&&Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden');if(!D||!D.set)return;
   for(const el of document.querySelectorAll('.overlay:not(.hub)')){
     let closing=0;
     Object.defineProperty(el,'hidden',{configurable:true,
@@ -5444,12 +5449,12 @@ function swipeTabs(){
 }
 /* botões "+" na carteira, como nos jogos da Supercell */
 function walletPlus(){
-  for(const id of['#wCoins','#wGems']){const s=$(id);if(!s||s.parentElement.querySelector('.plus'))continue;
+  for(const id of['#wCoins','#wGems']){const s=$(id);if(!s||!s.parentElement||s.parentElement.querySelector('.plus'))continue;
     const b=document.createElement('button');b.type='button';b.className='plus';b.textContent='+';b.setAttribute('aria-label',id==='#wGems'?'Comprar gemas':'Comprar moedas');
     b.addEventListener('click',e=>{e.stopPropagation();if($('#hub').hidden||state==='fight')return;sfx('click');shopTab='gemas';renderHub('loja');if(id==='#wCoins')setTimeout(()=>{const g=document.querySelector('[data-act="coinpack"]');if(g){const p=$('#pane');p.scrollTo({top:p.scrollTop+g.getBoundingClientRect().top-p.getBoundingClientRect().top-140,behavior:'smooth'});}},350);});
     s.parentElement.appendChild(b);}
 }
-function polishInit(){overlayExitAnims();swipeTabs();walletPlus();}
+function polishInit(){try{overlayExitAnims();swipeTabs();walletPlus();}catch(e){console.warn('polish',e);}}
 function boot(){
   ensureMissions();if(!save.opp)save.opp=makeGhost();persist();
   if(save.tut==null&&save.stats.wins+save.stats.losses>3)save.tut=99;
