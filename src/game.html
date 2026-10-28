@@ -1093,10 +1093,88 @@ button.primary:not(:disabled):not(:where(.subtabs,.chips2,.tabs) button):not(:wh
 #splash{background:radial-gradient(circle at 50% 35%,#5b95ff,#1a3796 70%)!important}
 @media (max-width:480px){h1.logo span{display:none}}
 #iris[hidden]{display:none}
+/* cartão do jogador na Arena: abre o perfil */
+.pcard[data-tab]{cursor:pointer;transition:transform .14s cubic-bezier(.2,1.6,.4,1),filter .15s}
+.pcard[data-tab]:active{transform:scale(.97);filter:brightness(1.08)}
+/* ---------- Troféus com profundidade: mundos por arena, trilho 3D, cartões em relevo ---------- */
+#roadScroll{background:#0e1640!important;padding:0 0 30px!important}
+.trtop{margin:0 0 0!important;background:linear-gradient(180deg,#2848b8,#1a2f80)!important;box-shadow:0 6px 0 rgba(5,8,30,.5),0 14px 24px rgba(5,8,30,.55)!important}
+.trin{display:block}
+.trsec{position:relative;overflow:hidden;padding:18px 14px 6px;isolation:isolate;
+  background:radial-gradient(60% 50% at 28% 50%,rgba(255,255,255,.14),transparent 70%),linear-gradient(180deg,var(--b2) 0%,var(--b1) 55%,var(--b2) 100%)}
+.trsec::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;box-shadow:inset 0 30px 40px -20px rgba(0,0,0,.55),inset 0 -20px 30px -20px rgba(0,0,0,.4),inset 18px 0 30px -18px rgba(0,0,0,.35),inset -18px 0 30px -18px rgba(0,0,0,.35)}
+.trsec.locked{filter:saturate(.75) brightness(.86)}
+.trpx,.trpt{position:absolute;left:0;right:0;top:-160px;bottom:-160px;z-index:-2;pointer-events:none;will-change:transform}
+.trpx{transform:translate3d(0,var(--py,0),0);opacity:.55}
+.p-lawn .trpx,.p-grass .trpx{background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.25) 0 2px,transparent 3px) 0 0/90px 110px,radial-gradient(circle at 70% 70%,rgba(255,220,120,.35) 0 3px,transparent 4px) 0 0/130px 150px,repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 28px,transparent 28px 56px)}
+.p-grass .trpx{background:radial-gradient(circle at 30% 40%,rgba(255,150,200,.5) 0 3px,transparent 4px) 0 0/110px 120px,radial-gradient(circle at 75% 65%,rgba(255,255,255,.35) 0 2px,transparent 3px) 0 0/80px 100px,repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 28px,transparent 28px 56px)}
+.p-sand .trpx{background:radial-gradient(120% 60% at 50% 120%,rgba(255,230,170,.18) 40%,transparent 41%) 0 0/220px 90px,radial-gradient(circle,rgba(255,240,200,.35) 0 1.5px,transparent 2px) 0 0/40px 46px}
+.p-ice .trpx{background:linear-gradient(60deg,transparent 48%,rgba(255,255,255,.18) 49% 51%,transparent 52%) 0 0/120px 120px,linear-gradient(-60deg,transparent 48%,rgba(255,255,255,.12) 49% 51%,transparent 52%) 0 0/160px 160px}
+.p-lava .trpx{background:radial-gradient(circle at 30% 40%,rgba(255,110,40,.45) 0 3px,transparent 6px) 0 0/120px 140px,linear-gradient(115deg,transparent 46%,rgba(255,90,30,.25) 47% 49%,transparent 50%) 0 0/200px 160px}
+.p-stars .trpx{background:radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 1.5px) 0 0/53px 61px,radial-gradient(circle,rgba(180,170,255,.7) 0 1.5px,transparent 2px) 20px 30px/97px 89px}
+.trpt{opacity:.8;animation:trdrift 18s linear infinite}
+.p-lawn .trpt,.p-grass .trpt{background:radial-gradient(ellipse 4px 2px at 50% 50%,rgba(200,255,150,.7),transparent) 0 0/170px 210px,radial-gradient(ellipse 3px 2px at 50% 50%,rgba(255,255,255,.6),transparent) 60px 80px/230px 190px}
+.p-sand .trpt{background:radial-gradient(circle,rgba(255,240,200,.6) 0 1px,transparent 2px) 0 0/70px 90px;animation-duration:9s}
+.p-ice .trpt{background:radial-gradient(circle,#fff 0 2px,transparent 3px) 0 0/90px 110px,radial-gradient(circle,rgba(255,255,255,.7) 0 1.5px,transparent 2px) 40px 50px/130px 150px}
+.p-lava .trpt{background:radial-gradient(circle,#ffb04a 0 2px,rgba(255,90,30,.5) 3px,transparent 5px) 0 0/110px 150px;animation-name:trrise;animation-duration:10s}
+.p-stars .trpt{background:radial-gradient(circle,#fff 0 1.5px,transparent 2.5px) 0 0/120px 140px;animation:trtw 3s ease-in-out infinite alternate}
+@keyframes trdrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-40px,160px,0)}}
+@keyframes trrise{from{transform:translate3d(0,0,0)}to{transform:translate3d(20px,-160px,0)}}
+@keyframes trtw{from{opacity:.25}to{opacity:.9}}
+.trr,.trme{position:relative;z-index:1}
+/* trilho em tubo, com sombra no chão */
+.trl{isolation:isolate}
+.trl::before{width:16px!important;margin-left:-8px!important;border-radius:2px;background:linear-gradient(90deg,#070b2a 0%,#24317a 30%,#3a4aa8 50%,#24317a 70%,#070b2a 100%)!important;box-shadow:0 0 0 2px var(--k)!important}
+.trl::after{content:"";position:absolute;left:calc(50% + 2px);top:0;bottom:0;width:18px;z-index:-1;background:rgba(0,0,0,.35);filter:blur(4px);transform:translateX(6px)}
+.trl.on::before,.trl.half::before{background:repeating-linear-gradient(0deg,rgba(255,255,255,0) 0 34px,rgba(255,255,255,.65) 42px,rgba(255,255,255,0) 50px 80px),linear-gradient(90deg,#8a4a00 0%,#ffb21c 28%,#fff3a0 50%,#ffb21c 72%,#8a4a00 100%)!important;
+  box-shadow:0 0 0 2px var(--k),0 0 14px rgba(255,200,60,.55)!important;animation:trflow 1.6s linear infinite}
+.trl.half::before{-webkit-mask:linear-gradient(transparent 50%,#000 50%);mask:linear-gradient(transparent 50%,#000 50%)}
+.trl.half{background:none}
+.trl.half::after{top:50%}
+@keyframes trflow{to{background-position:0 -80px,0 0}}
+/* marcos em medalhão */
+.trn{padding:5px 9px 5px 6px!important;border-width:3px!important;background:radial-gradient(120% 140% at 30% 20%,#5a72e0,#25389a 60%,#18266e)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.35),0 3px 0 var(--k),3px 6px 8px rgba(0,0,0,.45)!important}
+.trl.got .trn{background:radial-gradient(120% 140% at 30% 20%,#fff6b8,#ffc93a 45%,#e08e00)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.7),0 3px 0 var(--k),3px 6px 8px rgba(0,0,0,.45),0 0 12px rgba(255,200,60,.5)!important}
+/* cartões em relevo, luz de cima à esquerda */
+.trc{margin:8px 0 10px!important;background:linear-gradient(180deg,#ffffff 0%,#eef3ff 46%,#dbe4fb 54%,#cdd8f5 100%)!important;
+  box-shadow:inset 0 2px 0 #fff,inset 0 -4px 0 rgba(40,60,140,.14),0 5px 0 var(--k),6px 14px 16px rgba(0,0,0,.42)!important;transition:transform .35s cubic-bezier(.2,1.3,.4,1),opacity .35s}
+.tri{background:radial-gradient(circle at 50% 35%,#ffffff,#dbe4fa 70%)!important;box-shadow:inset 0 3px 7px rgba(20,30,90,.35),inset 0 -2px 0 rgba(255,255,255,.9),0 0 0 2px rgba(26,28,61,.22)!important}
+.tri .ico,.tri canvas{filter:drop-shadow(0 3px 0 rgba(0,0,0,.25))}
+.trr.big .trc{background:linear-gradient(180deg,#fffbe8 0%,#ffeeb0 46%,#ffd96b 54%,#ffcb45 100%)!important}
+.trr.big .trc[style]{background:linear-gradient(180deg,#fff 0%,color-mix(in srgb,var(--rc) 22%,#fff) 46%,color-mix(in srgb,var(--rc) 42%,#fff) 54%,color-mix(in srgb,var(--rc) 55%,#fff) 100%)!important}
+.trr.big .tri{position:relative;overflow:visible}
+.trr.big .tri::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,170,.9),rgba(255,210,80,0) 65%);z-index:0}
+.trr.big .tri>*{position:relative;z-index:1;animation:trbob 2.4s ease-in-out infinite}
+@keyframes trbob{50%{transform:translateY(-4px)}}
+.trr.s-done .trc{transform:scale(.96);filter:saturate(.45) brightness(.92);opacity:.85;box-shadow:inset 0 2px 0 #fff,0 3px 0 var(--k),3px 6px 8px rgba(0,0,0,.3)!important}
+.trr.s-ready .trc{transform:translateY(-3px) scale(1.02);background:linear-gradient(180deg,#fffbe0 0%,#ffef9e 46%,#ffd75e 54%,#ffc93a 100%)!important;box-shadow:inset 0 2px 0 #fff,0 5px 0 #8a4a00,8px 18px 20px rgba(0,0,0,.45),0 0 0 4px rgba(255,210,61,.45),0 0 26px rgba(255,200,40,.7)!important}
+.trr.next .trc{box-shadow:inset 0 2px 0 #fff,0 5px 0 var(--k),6px 14px 16px rgba(0,0,0,.42),0 0 0 3px #7fd0ff,0 0 18px rgba(127,208,255,.6)!important}
+/* entrada dos cartões ao deslizar */
+.reveal .trr:not(.in) .trc{opacity:0;transform:translateX(40px) scale(.9)}
+.reveal .trlg:not(.in){opacity:0;transform:scale(.92)}
+.trlg{transition:transform .45s cubic-bezier(.2,1.3,.4,1),opacity .45s}
+/* o teu marcador, com halo e sombra */
+.trmec{position:relative;transform:translateY(-2px);box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 4px 0 var(--k),6px 14px 16px rgba(0,0,0,.45)!important}
+.trmec .avatar{position:relative}
+.trmec .avatar::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:3px solid rgba(255,255,255,.8);animation:trhalo 1.6s ease-out infinite}
+@keyframes trhalo{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
+/* portas das arenas: a arena vista em 3D dentro de uma moldura */
+.trlg{margin:10px 0 16px!important;border:4px solid var(--k)!important;border-radius:22px!important;min-height:112px!important;background:#0b1030;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.18),0 6px 0 var(--k),8px 18px 22px rgba(0,0,0,.5)!important}
+.trfl{position:absolute;inset:0;perspective:420px;perspective-origin:50% 0%;overflow:hidden;border-radius:18px}
+.trlg .trfl canvas.arthumb{position:absolute;left:-15%;top:-10%;width:130%!important;height:150%!important;transform:rotateX(42deg);transform-origin:50% 0%}
+.trlg::after{z-index:0;background:linear-gradient(180deg,rgba(10,14,50,.15),rgba(10,14,50,.55)),linear-gradient(90deg,rgba(10,14,50,.85),rgba(10,14,50,.2) 75%)!important;border-radius:18px}
+.trlg::before{content:"";position:absolute;inset:0;z-index:1;border-radius:18px;pointer-events:none;box-shadow:inset 0 10px 18px rgba(0,0,0,.45),inset 0 -14px 22px rgba(0,0,0,.55)}
+.trlgi{z-index:2;min-height:112px!important}
+.trlgi .league .lsh{width:58px!important;height:58px!important;filter:drop-shadow(0 4px 0 var(--k)) drop-shadow(3px 8px 8px rgba(0,0,0,.5))}
+.trlg.cur{box-shadow:inset 0 0 0 3px rgba(255,255,255,.18),0 6px 0 var(--k),8px 18px 22px rgba(0,0,0,.5),0 0 0 4px #ffd23d,0 0 26px rgba(255,210,61,.6)!important}
+.trlg.cur .trlgi::after{content:"";position:absolute;inset:0;border-radius:18px;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.28) 50%,transparent 60%) no-repeat;background-size:250% 100%;animation:btnshine 4s ease-in-out infinite;pointer-events:none}
+.trlg.locked .trfl{filter:grayscale(.7) brightness(.55)}
+@media (prefers-reduced-motion:reduce){.trpt,.trl::before,.trr.big .tri>*,.trmec .avatar::after,.trlg.cur .trlgi::after{animation:none!important}}
 /* ---------- Troféus (caminho de prémios) ---------- */
 .rtop{padding-top:12px!important}
-#roadScroll{padding:0 14px 28px!important;background:radial-gradient(120% 40% at 50% 0%,rgba(255,255,255,.12),transparent 70%)}
-.trtop{position:sticky;top:0;z-index:5;margin:0 -14px 14px;padding:12px 16px 12px;display:grid;gap:7px;justify-items:center;text-align:center;color:#fff;
+#roadScroll{padding:0 0 30px!important;background:#0e1640!important}
+.trtop{position:sticky;top:0;z-index:5;margin:0;padding:12px 16px 12px;display:grid;gap:7px;justify-items:center;text-align:center;color:#fff;
   background:linear-gradient(180deg,#203a9a,#1a2f80);border-bottom:3px solid var(--k);box-shadow:0 6px 14px rgba(5,10,50,.35)}
 .trtop1{display:flex;align-items:center;gap:12px}
 .trtop .league{color:#fff;font:700 15px/1 var(--f-display);text-shadow:var(--ol1)}
@@ -4970,7 +5048,7 @@ const RICO={coracao:'heart',lamina:'sword',asas:'wing',carapaca:'spikes',gatilho
 const gemI=id=>`<svg class="relico" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="35" r="28" fill="#000" opacity=".22"/><circle cx="32" cy="32" r="28" style="fill:var(--rc)" stroke="#1e1d3f" stroke-width="3"/><circle cx="32" cy="32" r="21" fill="#fff" opacity=".22"/><path d="M12 24a21 21 0 0 1 16-14" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6" fill="none"/><use href="#i-${id?RICO[id]:'lock'}" x="9" y="9" width="46" height="46"/></svg>`;
 function profileStrip(){
   const t=COS.title[myCos().title]?.n||'Novato';
-  return `<div class="pcard"><div class="avatar f-${myCos().frame}">${avatarCanvas()}</div>
+  return `<div class="pcard" data-tab="perfil" data-sub="cartao" role="button" tabindex="0" aria-label="Ver o teu perfil"><div class="avatar f-${myCos().frame}">${avatarCanvas()}</div>
     <div class="grow"><div class="pname">${esc(save.name)}</div><span class="ptitle">${t}</span>
       <div class="lvl"><span class="lvlb" title="Nível ${save.level}">${I('star',36)}<b>${save.level}</b></span><div class="prog"><i style="width:${(save.xp/xpNeed(save.level)*100).toFixed(1)}%"></i></div></div></div>
     <div class="trophy">${leagueBadge(save.trophies)}<b>${I('trophy',24)}${save.trophies}</b></div></div>`;
@@ -5078,21 +5156,32 @@ function roadKind(r){if(r.t==='bonko')return `Bonko ${(BRN[BRAR[r.k]]||'').toLow
   return r.cos?'Cosmético surpresa':r.gems?'Gemas':'Moedas';}
 const roadBig=r=>r.t==='bonko'||r.t==='title'||r.cos||(r.t==='cht'&&r.ch==='magico');
 function roadPath(){
-  const best=save.bestTrophies,top=Math.max(3000,Math.ceil((best+600)/ROAD_STEP)*ROAD_STEP),items=[];
-  const nextIdx=roadReached();
+  const best=save.bestTrophies,top=Math.max(3000,Math.ceil((best+600)/ROAD_STEP)*ROAD_STEP),nextIdx=roadReached();
+  const secs=LEAGUES.map(()=>[]);
   for(let tr=top;tr>=0;tr-=ROAD_STEP){
+    const li=leagueIdx(tr),out=secs[li];
     if(tr>0){const i=tr/ROAD_STEP-1,r=roadReward(i),st=i<save.road?'done':i<nextIdx?'ready':'lock',big=roadBig(r);
       const icon=r.t==='bonko'?ico(r.k,-1,0,'classico'):I(roadIcon(r),big?50:36);
       const sub=st==='done'?'Recolhido':st==='ready'?'Pronto a recolher':i===nextIdx?`Faltam ${tr-best} troféus`:roadKind(r);
-      items.push(`<div class="trr s-${st}${big?' big':''}${i===nextIdx?' next':''}"${i===nextIdx?' id="roadNext"':''}>
+      out.push(`<div class="trr s-${st}${big?' big':''}${i===nextIdx?' next':''}"${i===nextIdx?' id="roadNext"':''}>
         <div class="trl ${tr+ROAD_STEP<=best?'on':tr<=best?'half':''}${tr<=best?' got':''}"><span class="trn">${I('trophy',13)}${tr}</span></div>
         <div class="trc" ${big&&r.t==='bonko'?`style="--rc:${BRC[BRAR[r.k]]}"`:''}><span class="tri">${icon}</span><span class="trt"><b>${r.coins&&!r.t&&!r.cos?`${fmt(r.coins)} moedas`:roadLabel(r)}</b><small>${sub}</small></span>${st==='done'?'<i class="ck" aria-hidden="true"></i>':st==='ready'?'<em class="trgo">!</em>':''}</div></div>`);}
-    if(save.trophies>=tr&&save.trophies<tr+ROAD_STEP)items.push(`<div class="trme" id="roadMe"><div class="trl ${best>=tr+ROAD_STEP?'on':'half'}"></div><div class="trmec"><span class="avatar sm f-${myCos().frame}">${avatarCanvas()}</span><b>Tu</b><span>${I('trophy',18)} ${save.trophies}</span></div></div>`);
-    LEAGUES.forEach(([nm,t,col],li)=>{if(t===tr){const th=arenaAt(li),open=best>=t,cur=leagueIdx(save.trophies)===li;
-      items.push(`<div class="trlg ${open?'open':'locked'}${cur?' cur':''}" style="--lc:${col}"><canvas class="arthumb" data-th="${th}" aria-hidden="true"></canvas>
-        <div class="trlgi">${leagueBadge(t)}<span class="grow"><small>Arena ${li+1} · ${t} troféus</small><b>${COS.arena[th].n}</b></span>${open?(cur?'<em>Estás aqui</em>':`<em class="ok">${I('star',18)}</em>`):`<em class="lk">${I('lock',20)}</em>`}</div></div>`);}});
+    if(save.trophies>=tr&&save.trophies<tr+ROAD_STEP)out.push(`<div class="trme" id="roadMe"><div class="trl ${best>=tr+ROAD_STEP?'on':'half'}"></div><div class="trmec"><span class="avatar sm f-${myCos().frame}">${avatarCanvas()}</span><b>Tu</b><span>${I('trophy',18)} ${save.trophies}</span></div></div>`);
+    LEAGUES.forEach(([nm,t,col],k)=>{if(t===tr){const th=arenaAt(k),open=best>=t,cur=leagueIdx(save.trophies)===k;
+      out.push(`<div class="trlg ${open?'open':'locked'}${cur?' cur':''}"><div class="trfl"><canvas class="arthumb" data-th="${th}" aria-hidden="true"></canvas></div>
+        <div class="trlgi">${leagueBadge(t)}<span class="grow"><small>Arena ${k+1} · ${t} troféus</small><b>${COS.arena[th].n}</b></span>${open?(cur?'<em>Estás aqui</em>':`<em class="ok">${I('star',18)}</em>`):`<em class="lk">${I('lock',20)}</em>`}</div></div>`);}});
   }
-  return items.join('');
+  return secs.map((rows,k)=>({rows,k})).reverse().map(({rows,k})=>{const th=arenaAt(k),A=ARENAS[th]||ARENAS.classica,[nm,t,col]=LEAGUES[k];
+    return `<section class="trsec p-${A.pat}${best>=t?'':' locked'}" style="--b1:${A.bg[0]};--b2:${A.bg[1]};--lc:${col};--rg:${A.ring}"><i class="trpx" aria-hidden="true"></i><i class="trpt" aria-hidden="true"></i>${rows.join('')}</section>`;}).join('');
+}
+function roadDepth(){
+  const sc=$('#roadScroll');if(!sc||sc.dataset.d)return;sc.dataset.d=1;
+  let raf=0;const run=()=>{raf=0;const H=sc.clientHeight,top=sc.getBoundingClientRect().top;
+    sc.querySelectorAll('.trsec').forEach(s=>{const r=s.getBoundingClientRect();if(r.bottom<top-200||r.top>top+H+200)return;
+      const mid=(r.top-top)+r.height/2-H/2;s.style.setProperty('--py',(mid*-.18).toFixed(1)+'px');});};
+  sc.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(run);},{passive:true});run();
+  if(!reduceMotion&&'IntersectionObserver'in window){const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}},{root:sc,rootMargin:'40px 0px'});
+    $('#roadIn').classList.add('reveal');sc.querySelectorAll('.trr,.trlg,.trme').forEach(el=>io.observe(el));}
 }
 function roadTop(){
   const li=leagueIdx(save.trophies),nx=LEAGUES[li+1],k=nx?Math.min(1,(save.trophies-LEAGUES[li][1])/(nx[1]-LEAGUES[li][1])):1,pend=roadPending(),nr=roadReward(roadReached()),nextT=(roadReached()+1)*ROAD_STEP;
@@ -5105,7 +5194,8 @@ function openRoad(){
   $('#roadScroll').innerHTML=`${roadTop()}<div class="trin" id="roadIn">${roadPath()}</div>`;
   const pend=roadPending();$('#btnRoadClaim').hidden=!pend;$('#btnRoadClaim').parentElement.hidden=!pend;$('#btnRoadClaim').textContent=`Recolher ${pend} ${pend>1?'prémios':'prémio'}`;
   $('#roadUI').hidden=false;paintCanvases($('#roadScroll'));
-  requestAnimationFrame(()=>{const sc=$('#roadScroll'),me=$('#roadMe')||$('#roadNext');if(!me)return;sc.scrollTop=Math.max(0,me.offsetTop-sc.clientHeight*.5);});
+  const sc0=$('#roadScroll');delete sc0.dataset.d;
+  requestAnimationFrame(()=>{const sc=$('#roadScroll'),me=$('#roadMe')||$('#roadNext');if(me){const r=me.getBoundingClientRect(),s=sc.getBoundingClientRect();sc.scrollTop=Math.max(0,sc.scrollTop+r.top-s.top-sc.clientHeight*.5);}roadDepth();});
 }
 function arenaCard(){
   const li=leagueIdx(save.trophies),th=arenaAt(li),nx=LEAGUES[li+1],pend=roadPending(),nextT=(roadReached()+1)*ROAD_STEP,nr=roadReward(roadReached());
