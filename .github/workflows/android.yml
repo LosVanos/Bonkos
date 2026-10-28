@@ -37,17 +37,13 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
       - name: Guardar a APK no ramo "apk" (para descarregar facilmente)
         run: |
-          cp android/app/build/outputs/apk/debug/app-debug.apk $RUNNER_TEMP/Bonkos.apk
-          git config user.name "bonkos-bot"
-          git config user.email "bonkos-bot@users.noreply.github.com"
-          git checkout --orphan apk
-          git rm -rf --cached . > /dev/null
-          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp $RUNNER_TEMP/Bonkos.apk Bonkos.apk
+          mkdir -p "$RUNNER_TEMP/apkbr" && cd "$RUNNER_TEMP/apkbr"
+          git init -q && git checkout -q -b apk
+          cp "$GITHUB_WORKSPACE/android/app/build/outputs/apk/debug/app-debug.apk" Bonkos.apk
           echo "Compilação ${{ github.run_number }} de ${{ github.sha }}" > LEIA-ME.txt
           git add Bonkos.apk LEIA-ME.txt
-          git commit -m "APK ${{ github.run_number }}"
-          git push -f origin apk
+          git -c user.name="bonkos-bot" -c user.email="bonkos-bot@users.noreply.github.com" commit -qm "APK ${{ github.run_number }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" apk
 
       - name: Preparar chave de assinatura
         if: env.HAS_KEYSTORE == 'true'

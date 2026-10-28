@@ -13,6 +13,6 @@ if(!fs.existsSync(R('www-config.js')))fs.copyFileSync(R('www-config.example.js')
 fs.copyFileSync(R('www-config.js'),R('www/config.js'));
 let g=fs.readFileSync(R('src/game.html'),'utf8');
 g=g.replace(/<link rel="preconnect"[^>]*>\s*/g,'').replace(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>/,'<link rel="stylesheet" href="fonts.css">');
-const head=`<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#3c46ff"><style>html,body{margin:0;height:100%;background:#2a1f8a;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}[hidden]{display:none!important}</style><script src="config.js"></script></head><body>`;
+const head=`<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#1b2a78"><style>html,body{margin:0;height:100%;background:#1a3796;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}[hidden]{display:none!important}</style><script src="config.js"></script></head><body>`;
 fs.writeFileSync(R('www/index.html'),head+g+'</body></html>');
 console.log('www pronto:',(fs.statSync(R('www/index.html')).size/1024).toFixed(0)+' KB');
