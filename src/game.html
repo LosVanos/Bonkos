@@ -1093,6 +1093,61 @@ button.primary:not(:disabled):not(:where(.subtabs,.chips2,.tabs) button):not(:wh
 #splash{background:radial-gradient(circle at 50% 35%,#5b95ff,#1a3796 70%)!important}
 @media (max-width:480px){h1.logo span{display:none}}
 #iris[hidden]{display:none}
+/* ---------- Troféus (caminho de prémios) ---------- */
+.rtop{padding-top:12px!important}
+#roadScroll{padding:0 14px 28px!important;background:radial-gradient(120% 40% at 50% 0%,rgba(255,255,255,.12),transparent 70%)}
+.trtop{position:sticky;top:0;z-index:5;margin:0 -14px 14px;padding:12px 16px 12px;display:grid;gap:7px;justify-items:center;text-align:center;color:#fff;
+  background:linear-gradient(180deg,#203a9a,#1a2f80);border-bottom:3px solid var(--k);box-shadow:0 6px 14px rgba(5,10,50,.35)}
+.trtop1{display:flex;align-items:center;gap:12px}
+.trtop .league{color:#fff;font:700 15px/1 var(--f-display);text-shadow:var(--ol1)}
+.trbig{display:flex;align-items:center;gap:6px;font:700 30px/1 var(--f-display);color:#ffd23d;text-shadow:var(--ol2)}
+.trbig .ico{width:30px;height:30px;filter:drop-shadow(0 2px 0 var(--k))}
+.trtop .prog{width:min(300px,90%);height:12px}
+.trtop .prog i{background:linear-gradient(90deg,var(--lc),#fff3a0)!important}
+.trtop small{font-size:13px;opacity:.95}.trtop small b{color:#ffd23d}
+.trnext{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#dfe7ff}.trnext b{color:#fff}.trnext .ico{width:24px;height:24px}
+.trin{display:grid;gap:0}
+.trr,.trme{display:grid;grid-template-columns:78px minmax(0,1fr);align-items:center;min-height:76px}
+.trr.big{min-height:104px}
+.trl{position:relative;align-self:stretch;display:grid;place-items:center}
+.trl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:12px;margin-left:-6px;background:#16205a;box-shadow:inset 0 2px 3px rgba(0,0,0,.5),0 0 0 2px var(--k)}
+.trl.on::before{background:linear-gradient(90deg,#ffb21c,#ffe36e 45%,#ffb21c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4),0 0 0 2px var(--k)}
+.trl.half::before{background:linear-gradient(#16205a 50%,#ffb21c 50%)}
+.trn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:2px;padding:4px 8px 4px 5px;border-radius:999px;border:2.5px solid var(--k);background:linear-gradient(180deg,#3b52c2,#25389a);color:#fff;font:700 13px/1 var(--f-display);text-shadow:var(--ol1);box-shadow:0 2px 0 var(--k)}
+.trn .ico{width:15px;height:15px}
+.trl.got .trn{background:linear-gradient(180deg,#ffe36e,#ffb21c);color:#fff}
+.trc{position:relative;display:flex;align-items:center;gap:12px;margin:6px 0;padding:10px 12px;border-radius:18px;border:3px solid var(--k);background:linear-gradient(180deg,#f7f9ff,#dfe7fb);box-shadow:inset 0 2px 0 #fff,0 4px 0 var(--k);color:var(--k)}
+.tri{display:grid;place-items:center;width:48px;height:48px;flex:none;border-radius:14px;background:radial-gradient(circle,#fff 0,#e2e9fb 75%);box-shadow:inset 0 0 0 2px rgba(26,28,61,.12)}
+.tri .ico{width:36px;height:36px}.tri canvas{width:48px;height:48px}
+.trt{display:grid;gap:2px;min-width:0}.trt b{font:700 15px/1.15 var(--f-display)}.trt small{font-size:12.5px;font-weight:700;color:#59628c}
+.trr.big .trc{padding:12px 14px;background:linear-gradient(135deg,#fff8dc,#ffe08a);box-shadow:inset 0 2px 0 #fff,0 4px 0 var(--k),0 0 0 0 transparent}
+.trr.big .trc[style]{background:linear-gradient(135deg,#fff,color-mix(in srgb,var(--rc) 35%,#fff))}
+.trr.big .tri{width:64px;height:64px;border-radius:18px}.trr.big .tri .ico{width:50px;height:50px}.trr.big .tri canvas{width:60px;height:60px}
+.trr.big .trt b{font-size:17px}
+.trr.s-done .trc{filter:saturate(.55);opacity:.72}
+.trc .ck{position:absolute;right:10px;top:50%;margin-top:-14px;width:28px;height:28px;border-radius:50%;background:#3fc43f;border:2.5px solid var(--k);box-shadow:0 2px 0 var(--k)}
+.trc .ck::after{content:"";position:absolute;left:8px;top:4px;width:7px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.trr.s-ready .trc{border-color:#a35b00;background:linear-gradient(180deg,#fff6c9,#ffd75e);box-shadow:inset 0 2px 0 #fff,0 4px 0 #a35b00,0 0 0 4px rgba(255,210,61,.45),0 0 22px rgba(255,200,40,.6);animation:trglow 1.6s ease-in-out infinite}
+@keyframes trglow{50%{box-shadow:inset 0 2px 0 #fff,0 4px 0 #a35b00,0 0 0 6px rgba(255,210,61,.25),0 0 30px rgba(255,200,40,.85)}}
+.trgo{position:absolute;right:10px;top:50%;margin-top:-15px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--red2);border:2.5px solid #fff;color:#fff;font:900 17px/1 var(--f-ui);font-style:normal;box-shadow:0 2px 0 var(--k)}
+.trr.s-lock .tri>*{filter:saturate(.75)}
+.trr.next .trc{box-shadow:inset 0 2px 0 #fff,0 4px 0 var(--k),0 0 0 3px #7fd0ff}
+.trme{min-height:64px}
+.trmec{display:flex;align-items:center;gap:10px;margin:4px 0;padding:6px 14px 6px 6px;width:max-content;border-radius:999px;border:3px solid var(--k);background:linear-gradient(180deg,#5aa6ff,#2f6fe0);box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 4px 0 var(--k);color:#fff;font:700 16px/1 var(--f-display);text-shadow:var(--ol1)}
+.trmec .avatar.sm{width:44px;height:44px}.trmec span{display:flex;align-items:center;gap:4px}.trmec span .ico{width:18px;height:18px}
+.trlg{position:relative;overflow:hidden;margin:14px -4px;border-radius:20px;border:3px solid var(--k);box-shadow:0 5px 0 var(--k);min-height:92px}
+.trlg canvas.arthumb{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover}
+.trlg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,14,50,.85),rgba(10,14,50,.35) 70%,rgba(10,14,50,.15))}
+.trlg.locked::after{background:linear-gradient(90deg,rgba(10,14,50,.92),rgba(10,14,50,.7))}
+.trlgi{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:14px 16px;color:#fff;min-height:92px;box-sizing:border-box}
+.trlgi .league{display:grid;justify-items:center;gap:2px;font:700 13px/1 var(--f-display);text-shadow:var(--ol1)}
+.trlgi .league .lsh{width:46px;height:46px}
+.trlgi small{display:block;font-size:12px;font-weight:700;opacity:.85}.trlgi b{display:block;font:700 20px/1.1 var(--f-display);text-shadow:var(--ol2)}
+.trlgi em{font-style:normal;font:700 13px/1 var(--f-display);padding:6px 10px;border-radius:999px;background:var(--lc);color:var(--k);border:2.5px solid var(--k);white-space:nowrap}
+.trlgi em.ok{background:#3fc43f;padding:4px}.trlgi em.ok .ico{width:18px;height:18px}
+.trlgi em.lk{background:#2a3570;padding:5px;border-color:#000}
+.trlg.cur{box-shadow:0 5px 0 var(--k),0 0 0 3px #ffd23d}
+@media (prefers-reduced-motion:reduce){.trr.s-ready .trc{animation:none}}
 /* luta: ultimate sempre dentro do ecrã, barra de fúria sem ficar por baixo dele, avisos curtos com quebra de linha */
 #ultBtn{right:max(12px,calc(8px + var(--sar)))!important;bottom:max(12px,calc(8px + var(--sab)))!important}
 #furyBar{left:max(12px,calc(8px + var(--sal)))!important;bottom:max(16px,calc(12px + var(--sab)))!important;max-width:calc(100% - 130px - var(--sar));flex-wrap:wrap;row-gap:4px}
@@ -1280,7 +1335,7 @@ header{padding-top:calc(9px + var(--sat))!important;padding-left:max(16px,var(--
 
     <div class="overlay" id="roadUI" hidden>
       <div class="rpanel" role="dialog" aria-labelledby="rdTitle">
-        <div class="rtop"><b id="rdTitle">Caminho de Troféus</b><button type="button" id="btnRoadClose">Fechar</button></div>
+        <div class="rtop"><b id="rdTitle">Troféus</b><button type="button" id="btnRoadClose">Fechar</button></div>
         <div class="rscroll" id="roadScroll"></div>
         <div class="rbot"><button type="button" class="primary" id="btnRoadClaim" hidden>Recolher</button></div>
       </div>
@@ -4512,7 +4567,7 @@ function arenaRails(){
   const bd=(id,v)=>want.includes(id)?(v===true?'!':v):'',hot=id=>want[0]===id;
   const L=[],R=[];
   if(feat('passe'))L.push(railBtn(I('crown',34),'Passe','data-act="passopen"',bd('pass',pc),hot('pass')));
-  L.push(railBtn(I('trophy',34),'Estrada','data-act="roadopen"',bd('road',road),hot('road')));
+  L.push(railBtn(I('trophy',34),'Troféus','data-act="roadopen"',bd('road',road),hot('road')));
   if(feat('missoes'))L.push(railBtn(I('scroll',34),'Missões','data-tab="missoes"',bd('mis',mReady),hot('mis')));
   if(feat('ranking'))R.push(railBtn(I('medal',34),'Ranking','data-act="rankopen"','',false));
   if(chN>0)R.push(railBtn(I('chest',34),'Baús','data-act="chest"',bd('chest',chN),hot('chest')));
@@ -4655,7 +4710,7 @@ function rankedResult(forfeit){
   save.trophies+=dT;save.bestTrophies=Math.max(save.bestTrophies,save.trophies);
   let coins=Math.round((won?80+lg*25:30+lg*8)*coinMult());let xp=won?25:10;
   const bonus=[];
-  if(won&&save.boost>0){coins*=2;save.boost--;bonus.push(`Moedas a dobrar (estrada): faltam ${save.boost}.`);}
+  if(won&&save.boost>0){coins*=2;save.boost--;bonus.push(`Moedas a dobrar (prémio de troféus): faltam ${save.boost}.`);}
   if(won&&me.key===featuredKey()){coins=Math.round(coins*1.5);xp=Math.round(xp*1.5);bonus.push(`Bonko do dia: +50% moedas e XP com ${TYPES[me.key].nome}.`);}
   if(won&&save.firstWin!==today()){save.firstWin=today();coins*=2;save.gems+=10;bonus.push('Primeira vitória do dia: moedas a dobrar e +10 gemas!');}
   if(won&&save.stats.streak>=2){const k=Math.min(5,save.stats.streak);const extra=Math.round(coins*.1*k);coins+=extra;bonus.push(`Série de ${save.stats.streak+1} vitórias: +${fmt(extra)} moedas.`);}
@@ -4706,8 +4761,8 @@ function rewardProgress(k,mastUp){let el=$('#rwProg');if(!el){el=document.create
   el.innerHTML=rows.join('');
   el.querySelectorAll('.gp i').forEach(i=>{const w=i.dataset.w;i.style.width='0%';setTimeout(()=>{i.style.width=w+'%';},80);});
 }
-function roadRow(){if(roadPending()>0)return barRow('gift','Prémio da estrada pronto!',1,1,'Recolhe na estrada','#5ccf7a');
-  const cur=save.bestTrophies%ROAD_STEP;return barRow('trophy',`Estrada: ${roadLabel(roadReward(roadReached()))}`,cur,ROAD_STEP,`faltam ${ROAD_STEP-cur} troféus`);}
+function roadRow(){if(roadPending()>0)return barRow('gift','Prémio de troféus pronto!',1,1,'Recolhe em Troféus','#5ccf7a');
+  const cur=save.bestTrophies%ROAD_STEP;return barRow('trophy',`Aos ${(roadReached()+1)*ROAD_STEP} troféus: ${roadLabel(roadReward(roadReached()))}`,cur,ROAD_STEP,`faltam ${ROAD_STEP-cur} troféus`);}
 function goalsCard(){
   const k=save.sel,T=tierOf(k),P=powerOf(k),c=[];
   c.push({f:roadPending()>0?2:(save.bestTrophies%ROAD_STEP)/ROAD_STEP,h:roadRow()});
@@ -4867,7 +4922,7 @@ const ACHONLY=(()=>{const m={};ACH.forEach(a=>Object.entries(a.rw).forEach(([k,v
 const LEAGUEFR={bronze:'Bronze',prata:'Prata',ouro:'Ouro',diamante:'Diamante'};
 function cosSource(cat,id){
   if(COS[cat][id]&&COS[cat][id].pass)return 'Passe Bonko (Premium)';
-  if(COS[cat][id]&&COS[cat][id].road)return 'Estrada de Troféus';
+  if(COS[cat][id]&&COS[cat][id].road)return 'Prémios de troféus';
   if(ACHONLY[cat+':'+id])return 'Conquista: '+ACHONLY[cat+':'+id];
   if(cat==='frame'&&LEAGUEFR[id])return 'Liga '+LEAGUEFR[id];
   if(cat==='arena')return 'Liga '+LEAGUES[COS.arena[id].lg][0];
@@ -4967,8 +5022,8 @@ function claimRoad(){
   save.road=roadReached();save.coins+=got.coins;save.gems+=got.gems;save.chests+=got.chests;persist();
   const parts=extra.filter(Boolean);if(got.coins)parts.push(`+${fmt(got.coins)} moedas`);if(got.gems)parts.push(`+${got.gems} gemas`);if(got.chests)parts.push(`+${got.chests} ${got.chests>1?'baús':'baú'}`);
   sfx('reward');if(unl){announce(TYPES[unl].nome+' desbloqueado!',BRC[BRAR[unl]],'go',true);sfx('level');}
-  rlAfter=cos?()=>showCosReveal(cos[0],cos[1],'Prémio da Estrada'):null;
-  if(list.length>1||!cos)showRewardList('Estrada de Troféus',list);else if(rlAfter){const f=rlAfter;rlAfter=null;f();}
+  rlAfter=cos?()=>showCosReveal(cos[0],cos[1],'Prémio de troféus'):null;
+  if(list.length>1||!cos)showRewardList('Prémios de troféus',list);else if(rlAfter){const f=rlAfter;rlAfter=null;f();}
 }
 let rlAfter=null,giveKey=null;
 function showRewardList(title,list){$('#rlTitle').textContent=title;
@@ -5018,25 +5073,39 @@ const ARENA_ORDER=['classica','deserto','jardim','glaciar','vulcao','cosmos'];
 const arenaAt=i=>ARENA_ORDER[Math.min(ARENA_ORDER.length-1,i)];
 const leagueArena=tr=>arenaAt(leagueIdx(tr));
 const ARENA_TXT={classica:'Relva fofa, onde todos começam.',deserto:'Areia quente e cactos por todo o lado.',jardim:'Canteiros floridos e muito verde.',glaciar:'Gelo azul e paredes de neve.',vulcao:'Rocha negra e rios de lava.',cosmos:'Uma arena a flutuar entre as estrelas.'};
+/* ---------- Troféus: caminho de prémios (redesenhado) ---------- */
+function roadKind(r){if(r.t==='bonko')return `Bonko ${(BRN[BRAR[r.k]]||'').toLowerCase()}`;if(r.t)return{title:'Título e gemas',cht:'Baú',frag:'Fragmentos',boost:'Bónus de moedas',scroll:'Melhoria grátis',relic:'Relíquia',key:'Abre um baú já',pxp:'Passe Bonko'}[r.t];
+  return r.cos?'Cosmético surpresa':r.gems?'Gemas':'Moedas';}
+const roadBig=r=>r.t==='bonko'||r.t==='title'||r.cos||(r.t==='cht'&&r.ch==='magico');
 function roadPath(){
-  const top=Math.max(3000,Math.ceil((save.bestTrophies+600)/ROAD_STEP)*ROAD_STEP),items=[];
+  const best=save.bestTrophies,top=Math.max(3000,Math.ceil((best+600)/ROAD_STEP)*ROAD_STEP),items=[];
+  const nextIdx=roadReached();
   for(let tr=top;tr>=0;tr-=ROAD_STEP){
-    if(tr>0){const i=tr/ROAD_STEP-1,r=roadReward(i),st=i<save.road?'done':i<roadReached()?'ready':'lock',side=Math.round(Math.sin(i*.9)*2);
-      items.push(`<div class="pn ${st}" style="--x:${side}"><span class="pni ${r.t?'rt-'+r.t:''}">${r.t==='bonko'?ico(r.k,-1,0,'classico'):I(roadIcon(r),r.cos||r.t==='cht'||r.chests>1?42:34)}${st==='done'?'<i class="ck" aria-hidden="true"></i>':''}</span><span class="pnt"><b>${roadLabel(r)}</b><small>${I('trophy',14)} ${tr}</small></span></div>`);}
-    LEAGUES.forEach(([nm,t,col],li)=>{if(t===tr){const th=arenaAt(li),open=save.bestTrophies>=t,cur=leagueArena(save.trophies)===th;
-      items.push(`<div class="pa ${open?'open':'locked'}${cur?' cur':''}" style="--lc:${col}"><canvas class="arthumb" data-th="${th}" aria-hidden="true"></canvas>
-        <div class="pai"><small>Arena ${li+1} · Liga ${nm}</small><b>${COS.arena[th].n}</b><span>${ARENA_TXT[th]}</span></div>
-        <div class="pas">${open?(cur?'<em>Estás aqui</em>':'<em class="ok">Desbloqueada</em>'):`<em class="lk">${I('lock',18)} ${t} troféus</em>`}</div></div>`);}});
-    if(save.trophies>=tr&&save.trophies<tr+ROAD_STEP)items.push(`<div class="pme" id="roadMe"><span class="avatar sm f-${myCos().frame}">${avatarCanvas()}</span><b>${I('trophy',16)} ${save.trophies}</b></div>`);
+    if(tr>0){const i=tr/ROAD_STEP-1,r=roadReward(i),st=i<save.road?'done':i<nextIdx?'ready':'lock',big=roadBig(r);
+      const icon=r.t==='bonko'?ico(r.k,-1,0,'classico'):I(roadIcon(r),big?50:36);
+      const sub=st==='done'?'Recolhido':st==='ready'?'Pronto a recolher':i===nextIdx?`Faltam ${tr-best} troféus`:roadKind(r);
+      items.push(`<div class="trr s-${st}${big?' big':''}${i===nextIdx?' next':''}"${i===nextIdx?' id="roadNext"':''}>
+        <div class="trl ${tr+ROAD_STEP<=best?'on':tr<=best?'half':''}${tr<=best?' got':''}"><span class="trn">${I('trophy',13)}${tr}</span></div>
+        <div class="trc" ${big&&r.t==='bonko'?`style="--rc:${BRC[BRAR[r.k]]}"`:''}><span class="tri">${icon}</span><span class="trt"><b>${r.coins&&!r.t&&!r.cos?`${fmt(r.coins)} moedas`:roadLabel(r)}</b><small>${sub}</small></span>${st==='done'?'<i class="ck" aria-hidden="true"></i>':st==='ready'?'<em class="trgo">!</em>':''}</div></div>`);}
+    if(save.trophies>=tr&&save.trophies<tr+ROAD_STEP)items.push(`<div class="trme" id="roadMe"><div class="trl ${best>=tr+ROAD_STEP?'on':'half'}"></div><div class="trmec"><span class="avatar sm f-${myCos().frame}">${avatarCanvas()}</span><b>Tu</b><span>${I('trophy',18)} ${save.trophies}</span></div></div>`);
+    LEAGUES.forEach(([nm,t,col],li)=>{if(t===tr){const th=arenaAt(li),open=best>=t,cur=leagueIdx(save.trophies)===li;
+      items.push(`<div class="trlg ${open?'open':'locked'}${cur?' cur':''}" style="--lc:${col}"><canvas class="arthumb" data-th="${th}" aria-hidden="true"></canvas>
+        <div class="trlgi">${leagueBadge(t)}<span class="grow"><small>Arena ${li+1} · ${t} troféus</small><b>${COS.arena[th].n}</b></span>${open?(cur?'<em>Estás aqui</em>':`<em class="ok">${I('star',18)}</em>`):`<em class="lk">${I('lock',20)}</em>`}</div></div>`);}});
   }
   return items.join('');
 }
+function roadTop(){
+  const li=leagueIdx(save.trophies),nx=LEAGUES[li+1],k=nx?Math.min(1,(save.trophies-LEAGUES[li][1])/(nx[1]-LEAGUES[li][1])):1,pend=roadPending(),nr=roadReward(roadReached()),nextT=(roadReached()+1)*ROAD_STEP;
+  return `<div class="trtop" style="--lc:${LEAGUES[li][2]}">
+    <div class="trtop1">${leagueBadge(save.trophies)}<b class="trbig">${I('trophy',30)}${save.trophies}</b></div>
+    ${nx?`<div class="prog"><i style="width:${(k*100).toFixed(1)}%"></i></div><small>Faltam <b>${nx[1]-save.trophies}</b> troféus para a Liga ${nx[0]}</small>`:'<small>Estás na liga mais alta!</small>'}
+    <div class="trnext">${pend?`<span class="pill acc">${pend} ${pend>1?'prémios prontos':'prémio pronto'}</span>`:`${I(roadIcon(nr),24)}<span>Próximo prémio aos <b>${nextT}</b>: ${roadLabel(nr)}</span>`}</div></div>`;
+}
 function openRoad(){
-  $('#roadScroll').innerHTML=`<div class="rin" id="roadIn"><div class="pline"><i id="roadFill"></i></div>${roadPath()}</div>`;
+  $('#roadScroll').innerHTML=`${roadTop()}<div class="trin" id="roadIn">${roadPath()}</div>`;
   const pend=roadPending();$('#btnRoadClaim').hidden=!pend;$('#btnRoadClaim').parentElement.hidden=!pend;$('#btnRoadClaim').textContent=`Recolher ${pend} ${pend>1?'prémios':'prémio'}`;
   $('#roadUI').hidden=false;paintCanvases($('#roadScroll'));
-  requestAnimationFrame(()=>{const sc=$('#roadScroll'),me=$('#roadMe');if(!me)return;sc.scrollTop=me.offsetTop-sc.clientHeight*.55;
-    $('#roadFill').style.height=Math.max(0,$('#roadIn').offsetHeight-me.offsetTop-me.offsetHeight/2)+'px';});
+  requestAnimationFrame(()=>{const sc=$('#roadScroll'),me=$('#roadMe')||$('#roadNext');if(!me)return;sc.scrollTop=Math.max(0,me.offsetTop-sc.clientHeight*.5);});
 }
 function arenaCard(){
   const li=leagueIdx(save.trophies),th=arenaAt(li),nx=LEAGUES[li+1],pend=roadPending(),nextT=(roadReached()+1)*ROAD_STEP,nr=roadReward(roadReached());
@@ -5401,7 +5470,7 @@ $('#hub').addEventListener('click',e=>{
   const tabB=e.target.closest('[data-tab]');
   if(tabB&&!tabB.closest('[data-act]')){tutEvent('tab'+tabB.dataset.tab);armReset=armPrestige=false;if(tabB.dataset.sub)curSub=tabB.dataset.sub;renderHub(tabB.dataset.tab);return;}
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
-  if(b.dataset.poor){sfx('click');buzz(12);b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');toast(b.dataset.poor==='gems'?'Faltam gemas: ganha-as em baús, missões e na estrada':'Faltam moedas: luta, recolhe a quinta ou abre baús');return;}
+  if(b.dataset.poor){sfx('click');buzz(12);b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');toast(b.dataset.poor==='gems'?'Faltam gemas: ganha-as em baús, missões e nos prémios de troféus':'Faltam moedas: luta, recolhe a quinta ou abre baús');return;}
   const act=b.dataset.act;sfx(act==='up'||act==='claim'||act==='buy'?'coin':'click');
   if(act!=='reset')armReset=false;if(act!=='prestige')armPrestige=false;
   switch(act){
