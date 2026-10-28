@@ -35,7 +35,10 @@ jobs:
 
       - name: APK de teste (instala no telemóvel)
         working-directory: android
-        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee "$RUNNER_TEMP/build.log"
+          exit ${PIPESTATUS[0]}
       - uses: actions/upload-artifact@v4
         with:
           name: bonkos-apk-teste
@@ -67,3 +70,13 @@ jobs:
         with:
           name: bonkos-aab-playstore
           path: android/app/build/outputs/bundle/release/app-release.aab
+
+      - name: Guardar o registo do erro (ramo "log")
+        if: failure()
+        run: |
+          mkdir -p "$RUNNER_TEMP/logbr" && cd "$RUNNER_TEMP/logbr"
+          git init -q && git checkout -q -b log
+          if [ -f "$RUNNER_TEMP/build.log" ]; then grep -n -B3 -A25 -E "FAILURE|What went wrong|error:|ERROR|Exception" "$RUNNER_TEMP/build.log" | head -c 150000 > erros.txt; tail -c 150000 "$RUNNER_TEMP/build.log" > build.log; else echo "sem registo" > build.log; fi
+          git add -A
+          git -c user.name="bonkos-bot" -c user.email="bonkos-bot@users.noreply.github.com" commit -qm "registo ${{ github.run_number }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" log
