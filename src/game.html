@@ -1093,6 +1093,12 @@ button.primary:not(:disabled):not(:where(.subtabs,.chips2,.tabs) button)::after{
 #splash{background:radial-gradient(circle at 50% 35%,#5b95ff,#1a3796 70%)!important}
 @media (max-width:480px){h1.logo span{display:none}}
 #iris[hidden]{display:none}
+/* margem de segurança: câmara, cantos redondos e barras do sistema (telemóvel) */
+:root{--sat:max(env(safe-area-inset-top,0px),var(--safe-area-inset-top,0px));--sab:max(env(safe-area-inset-bottom,0px),var(--safe-area-inset-bottom,0px));--sal:max(env(safe-area-inset-left,0px),var(--safe-area-inset-left,0px));--sar:max(env(safe-area-inset-right,0px),var(--safe-area-inset-right,0px))}
+header{padding-top:calc(9px + var(--sat))!important;padding-left:max(16px,var(--sal))!important;padding-right:max(16px,var(--sar))!important}
+.tabs{padding-bottom:var(--sab)!important;padding-left:var(--sal)!important;padding-right:var(--sar)!important}
+#vsUI,#splash{padding-top:var(--sat);padding-bottom:var(--sab)}
+@media (max-width:420px){header{padding-top:calc(7px + var(--sat))!important;padding-left:max(10px,var(--sal))!important;padding-right:max(10px,var(--sar))!important}}
 </style>
 
 <div id="app">
@@ -4548,8 +4554,8 @@ function nativeInit(){const App=CAP('App');if(!NATIVE||!App)return;
     if($('#hub').hidden&&(state==='fight'||state==='intro'||state==='ko')){if(!paused)togglePause();return;}
     if(curTab!=='arena'){renderHub('arena');return;}
     App.minimizeApp?App.minimizeApp():App.exitApp();});
-  App.addListener('appStateChange',s=>{if(!s.isActive&&$('#hub').hidden&&state==='fight'&&!paused)togglePause();if(s.isActive&&!$('#hub').hidden){farmWelcome();}});
-  const SB=CAP('StatusBar');if(SB){try{SB.setOverlaysWebView({overlay:true});SB.setStyle({style:'DARK'});}catch(e){}}
+  const immersive=()=>{try{const SYS=CAP('SystemBars'),SB=CAP('StatusBar');if(SYS&&SYS.hide)SYS.hide();else if(SB&&SB.hide)SB.hide();}catch(e){}};immersive();
+  App.addListener('appStateChange',s=>{if(!s.isActive&&$('#hub').hidden&&state==='fight'&&!paused)togglePause();if(s.isActive){immersive();if(!$('#hub').hidden)farmWelcome();}});
 }
 function platformInit(){fxApply();adsInit();iapInit();nativeInit();}
 

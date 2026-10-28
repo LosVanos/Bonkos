@@ -2,9 +2,20 @@
   "appId": "pt.bonkos.game",
   "appName": "Bonkos",
   "webDir": "www",
-  "backgroundColor": "#2a1f8a",
-  "android": { "backgroundColor": "#2a1f8a", "allowMixedContent": false },
+  "backgroundColor": "#1a3796",
+  "android": {
+    "backgroundColor": "#1a3796",
+    "allowMixedContent": false
+  },
   "plugins": {
-    "AdMob": { "appIdAndroid": "ca-app-pub-3940256099942544~3347511713" }
+    "AdMob": {
+      "appIdAndroid": "ca-app-pub-3940256099942544~3347511713"
+    },
+    "SystemBars": {
+      "hidden": true,
+      "style": "DARK",
+      "insetsHandling": "css",
+      "initialViewportFitValueHint": "cover"
+    }
   }
 }
