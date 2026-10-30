@@ -8,7 +8,7 @@ for(const[f,ws]of fonts)for(const w of ws)for(const sub of['latin','latin-ext'])
   fs.copyFileSync(R(`node_modules/@fontsource/${f}/files/${fn}`),R('www/fonts/'+fn));
   css+=`@font-face{font-family:'${f[0].toUpperCase()+f.slice(1)}';font-style:normal;font-display:swap;font-weight:${w};src:url(fonts/${fn}) format('woff2');${sub==='latin'?'unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;':''}}\n`;}
 fs.writeFileSync(R('www/fonts.css'),css);
-for(const f of['firebase-app-compat.js','firebase-auth-compat.js','firebase-firestore-compat.js'])fs.copyFileSync(R('node_modules/firebase/'+f),R('www/vendor/firebase/'+f));
+for(const f of['firebase-app-compat.js','firebase-auth-compat.js','firebase-firestore-compat.js','firebase-analytics-compat.js'])fs.copyFileSync(R('node_modules/firebase/'+f),R('www/vendor/firebase/'+f));
 if(!fs.existsSync(R('www-config.js')))fs.copyFileSync(R('www-config.example.js'),R('www-config.js'));
 fs.copyFileSync(R('www-config.js'),R('www/config.js'));
 let g=fs.readFileSync(R('src/game.html'),'utf8');

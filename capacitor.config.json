@@ -16,6 +16,10 @@
       "style": "DARK",
       "insetsHandling": "css",
       "initialViewportFitValueHint": "cover"
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_bonko",
+      "iconColor": "#3c6cff"
     }
   }
 }

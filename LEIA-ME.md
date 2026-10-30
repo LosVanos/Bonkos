@@ -15,15 +15,32 @@ Cada vez que mudares algo e carregares no GitHub, sai uma APK nova.
 
 ## 2. Ligar o online: ranking, adversários reais e transferir progresso
 
-1. Vai a console.firebase.google.com › Adicionar projeto › `bonkos`. O Google Analytics é opcional.
+1. Vai a console.firebase.google.com › Adicionar projeto › `bonkos`. **Liga o Google Analytics** quando to perguntar: é ele que te diz quantas pessoas voltam ao jogo.
 2. Em **Authentication › Sign-in method**, liga o **Anónimo**.
 3. Em **Firestore Database**, cria a base de dados em modo de produção, na região `europe-west1`.
 4. No separador **Regras**, cola o conteúdo de `firebase/firestore.rules` e publica.
 5. Em **Definições do projeto › As tuas apps**, adiciona uma app **Web** (ícone `</>`) e copia o bloco `firebaseConfig`.
-6. Abre `www-config.js` e troca `window.BONKOS_FIREBASE = null;` pelo teu bloco, com o formato do exemplo que está no ficheiro.
+6. Abre `www-config.js` e troca `window.BONKOS_FIREBASE = null;` pelo teu bloco, com o formato do exemplo que está no ficheiro. Confirma que o bloco traz `measurementId` (começa por `G-`): sem ele não há estatísticas.
 7. Carrega no GitHub. A nova APK já fica ligada.
 
 O plano grátis do Firebase (Spark) chega para os testes e para os primeiros milhares de jogadores.
+
+### O que vais ver nas estatísticas (Firebase › Analytics)
+- **Retenção:** quantas pessoas voltam no dia seguinte e ao fim de 7 dias. Referência para jogos casuais: 35% e 10–15%.
+- **Funil do tutorial:** `tutorial_step`, `tutorial_complete` e `tutorial_skip` mostram onde as pessoas desistem.
+- **Lutas:** `battle_start` e `battle_end` (com o bonko, a evolução, se ganhou e quanto tempo durou). Servem para ver que bonkos estão fortes demais.
+- **Progressão:** `level_up`, `feature_unlock`, `chest_open`, `screen_view`.
+- **Dinheiro:** `purchase_start`, `purchase_done`, `ad_reward`.
+- **Erros:** `app_error` regista os erros do jogo, com a mensagem.
+
+## 2b. Avisos (notificações)
+Já estão na app e não precisam de configuração. Na primeira vez que o jogador começa a abrir um baú, o jogo pergunta se ele quer avisos. Há quatro:
+- baú pronto;
+- celeiro cheio;
+- prémio diário;
+- "os teus bonkos têm saudades", ao fim de dois dias sem jogar.
+
+Nunca são enviados entre as 22h e as 9h30. Podem ser desligados em Perfil › Ajustes.
 
 ## 3. Anúncios com recompensa (AdMob)
 
